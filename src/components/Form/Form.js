@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import List from "../List/List";
 import { Link } from "react-router-dom";
 import { default as api } from "../../store/apiSlice";
 

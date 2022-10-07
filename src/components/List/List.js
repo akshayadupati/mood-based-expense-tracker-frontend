@@ -1,7 +1,7 @@
 import "boxicons";
 import { default as api } from "../../store/apiSlice";
 import Charts from "../Charts/Charts";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 export default function List() {
   const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
