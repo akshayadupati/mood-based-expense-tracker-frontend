@@ -37,7 +37,7 @@ export default function List() {
   if (isFetching)
     return (
       <div className="flex justify-center items-center">
-        <img src="https://i.gifer.com/ZZ5H.gif" className="h-50" />
+        <img src={loader} alt="Loader GIF" className="h-50" />
       </div>
     );
   return (
