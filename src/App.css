@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #282828;
+  --color-darkblue: #0c0032;
+  --color-blue-800: #190061;
+  --color-blue-400: #240090;
+  --color-blue-200: #3500d3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  /* padding: 4em 0; */
+  background-image: url("../../frontend//src/assets/plain.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: calc(100vh);
+  height: 100vh;
+  background-attachment: fixed;
+  overflow: auto;
+}
+
+.bg-black {
+  background-color: var(--color-black);
+}
+
+.bg-darkblue {
+  background-color: var(--color-darkblue);
+}
+
+.bg-blue-800 {
+  background-color: var(--color-blue-800);
+}
+
+.bg-blue-400 {
+  background-color: var(--color-blue-400);
+}
+
+.bg-blue-200 {
+  background-color: var(--color-blue-200);
+}
+
+.text-blue-200 {
+  color: var(--color-blue-200);
+}
+
+.title {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 45%;
+}
+
+.form-input {
+  @apply mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md focus:outline-none focus:ring-fuchsia-300 sm:text-sm;
+}
+
+.home {
+
+}
