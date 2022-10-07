@@ -18,7 +18,7 @@
 .App {
   text-align: center;
   /* padding: 4em 0; */
-  background-image: url("../../frontend//src/assets/plain.jpg");
+  background-image: url("../src/assets/plain.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-clip: calc(100vh);
