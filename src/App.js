@@ -5,7 +5,6 @@ import Home from "./components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const location = window.location.pathname;
   return (
     <BrowserRouter>
       <div className="App">
