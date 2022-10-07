@@ -51,7 +51,7 @@ export default function List() {
             <h1 className="py-4 font-bold text-xl">Transaction Summary</h1>
 
             <span>
-              <button className="border-2 p-2 border-transparent shadow-2xl	">
+              <button className="download-btn p-2 border-transparent shadow-2xl	">
                 <CSVLink
                   data={csvData}
                   filename={"my-expense.csv"}
