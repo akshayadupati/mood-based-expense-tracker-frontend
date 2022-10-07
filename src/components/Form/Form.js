@@ -7,7 +7,6 @@ const Form = () => {
   const [addTransaction] = api.useAddTransactionMutation();
 
   const submitFormHandler = async (data) => {
-    console.log("form data", data);
     if (!data) return {};
     await addTransaction(data).unwrap();
     resetField("expenseName");

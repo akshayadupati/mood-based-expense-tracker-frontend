@@ -9,7 +9,6 @@ export default function Labels() {
   if (isFetching) {
     Transactions = <h2>Fetching....</h2>;
   } else if (isSuccess) {
-    console.log("dataaa", getLabels(data));
     Transactions = getLabels(data).map((eachLabel, index) => (
       <LabelComponent key={index} eachLabel={eachLabel}></LabelComponent>
     ));

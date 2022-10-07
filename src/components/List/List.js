@@ -7,7 +7,7 @@ export default function List() {
   const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
   const [deleteTransaction] = api.useDeleteTransactionMutation();
   let Transactions;
-  let csvData;
+  let csvData = [];
 
   const handleDelete = async (e) => {
     if (!e.target.dataset.id) return 0;
@@ -42,11 +42,15 @@ export default function List() {
         <h1 className="py-4 font-bold text-xl">Transaction Summary</h1>
         <span>
           <button className="border-2 p-2 border-transparent shadow-2xl	">
-            {data && (
-              <CSVLink data={csvData} filename={"my-expense.csv"} className="flex flex-end items-center gap-4">
+            {csvData.length !== 0 && data !== undefined && (
+              <CSVLink
+                data={csvData}
+                filename={"my-expense.csv"}
+                className="flex flex-end items-center gap-4"
+              >
                 Download CSV
                 <box-icon
-                className="mt-5"
+                  className="mt-5"
                   size="20px"
                   color="black"
                   name="download"

@@ -29,7 +29,6 @@ export function getLabels(transaction) {
 export function chartData(transaction) {
   let bg = _.map(transaction, (a) => a.color);
   bg = _.uniq(bg);
-  console.log("bg", bg);
   let dataValue = getSum(transaction);
   const config = {
     data: {

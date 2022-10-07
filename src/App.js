@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const location = window.location.pathname;
-  console.log("location", location);
   return (
     <BrowserRouter>
       <div className="App">
