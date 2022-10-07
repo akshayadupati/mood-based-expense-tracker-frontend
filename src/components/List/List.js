@@ -2,6 +2,7 @@ import "boxicons";
 import { default as api } from "../../store/apiSlice";
 import Charts from "../Charts/Charts";
 import { CSVLink } from "react-csv";
+import loader from "../../assets/loader.gif";
 
 export default function List() {
   const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
@@ -33,35 +34,46 @@ export default function List() {
     Transactions = <h2>Ooops. Error occurred! </h2>;
   }
 
+  if (isFetching)
+    return (
+      <div className="flex justify-center items-center">
+        <img src="https://i.gifer.com/ZZ5H.gif" className="h-50" />
+      </div>
+    );
   return (
-    <div className="grid md:grid-cols-2 gap-4">
-      <div>
-        <Charts />
-      </div>
-      <div className="flex flex-col py-6 gap-3">
-        <h1 className="py-4 font-bold text-xl">Transaction Summary</h1>
-        <span>
-          <button className="border-2 p-2 border-transparent shadow-2xl	">
-            {csvData.length !== 0 && data !== undefined && (
-              <CSVLink
-                data={csvData}
-                filename={"my-expense.csv"}
-                className="flex flex-end items-center gap-4"
-              >
-                Download CSV
-                <box-icon
-                  className="mt-5"
-                  size="20px"
-                  color="black"
-                  name="download"
-                />
-              </CSVLink>
-            )}
-          </button>
-        </span>
-        {Transactions}
-      </div>
-    </div>
+    <>
+      {csvData.length !== 0 && data !== undefined ? (
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <Charts />
+          </div>
+          <div className="flex flex-col py-6 gap-3">
+            <h1 className="py-4 font-bold text-xl">Transaction Summary</h1>
+
+            <span>
+              <button className="border-2 p-2 border-transparent shadow-2xl	">
+                <CSVLink
+                  data={csvData}
+                  filename={"my-expense.csv"}
+                  className="flex flex-end items-center gap-4"
+                >
+                  Download CSV
+                  <box-icon
+                    className="mt-5"
+                    size="20px"
+                    color="black"
+                    name="download"
+                  />
+                </CSVLink>
+              </button>
+            </span>
+            {Transactions}
+          </div>
+        </div>
+      ) : (
+        <h1>No transactions are added yet. </h1>
+      )}
+    </>
   );
 }
 

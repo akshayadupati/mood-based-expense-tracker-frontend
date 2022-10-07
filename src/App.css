@@ -62,6 +62,6 @@
   @apply mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md focus:outline-none focus:ring-fuchsia-300 sm:text-sm;
 }
 
-.home {
-
+.h-50 {
+  height: 50px !important;
 }
