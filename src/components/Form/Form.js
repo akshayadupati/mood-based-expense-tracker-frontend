@@ -15,7 +15,6 @@ const Form = () => {
 
   return (
     <div className="form max-w-sm mx-auto w-96">
-      {console.log("window location", window.location)}
       <h1 className="font-bold pb-4 text-xl">Transaction</h1>
       <form id="form" onSubmit={handleSubmit(submitFormHandler)}>
         <div className="grid gap-4">
@@ -64,7 +63,6 @@ const Form = () => {
           </button>
         </Link>
       </div>
-      {/* <List></List> */}
     </div>
   );
 };

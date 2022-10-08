@@ -50,7 +50,7 @@ export default function List() {
           <div className="flex flex-col py-6 gap-3">
             <h1 className="py-4 font-bold text-xl">Transaction Summary</h1>
 
-            <span>
+            <span className="mb-5">
               <button className="download-btn p-2 border-transparent shadow-2xl	">
                 <CSVLink
                   data={csvData}

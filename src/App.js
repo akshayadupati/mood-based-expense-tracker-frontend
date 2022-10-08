@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <div className="container mx-auto text-center max-w-6xl">
-          <h1 className="text-4xl text-white mb-10 py-8 bg-black">
+          <h1 className="text-white text-4xl mb-10 py-8 bg-black">
             Mood Based Expense Tracker
           </h1>
           <div className="grid">
