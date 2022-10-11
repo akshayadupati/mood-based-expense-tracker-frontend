@@ -106,6 +106,11 @@ export default function List() {
             </div>
 
             {Transactions}
+            <Link to="/home">
+              <button className="download-btn p-2 mt-2 border-transparent shadow-2xl">
+                Add Transactions
+              </button>
+            </Link>
           </div>
         </div>
       ) : (
