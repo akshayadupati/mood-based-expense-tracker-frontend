@@ -27,13 +27,13 @@ const Charts = () => {
   return (
     <div className="flex max-w-xs mx-auto">
       <div className="flex-item">
-        <div className="chart relative">
+        <div className="chart">
           {graphData}
-          <h3 className="title mx-auto">
-            Total : <span>${totalData}</span>{" "}
+          <h3 className="mt-3 mx-auto">
+            Total Transactions made : <span>${totalData}</span>
           </h3>
         </div>
-        <div className="flex flex-col py-10 gap-4">
+        <div className="flex flex-col py-5 gap-4">
           <Labels />
         </div>
       </div>

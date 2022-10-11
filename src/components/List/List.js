@@ -138,7 +138,8 @@ function Transaction({ category, handleDelete }) {
       <button className="px-3" onClick={handleDelete}>
         <box-icon data-id={category._id} size="15px" color="red" name="trash" />
       </button>
-      <span className="block w-full">{category.expenseName ?? ""}</span>
+      <span className="block w-3/6 font-bold">{category.expenseName ?? ""}</span>
+      <span className="block w-3/6 font-bold">{category.transactionAmount ?? ""}</span>
     </div>
   );
 }
