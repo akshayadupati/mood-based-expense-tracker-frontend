@@ -47,6 +47,7 @@ export default function List() {
       if (eachData.transactionMood === e.target.value) {
         return eachData;
       }
+      return null;
     });
     setFilteredData(filteredData);
   };
@@ -88,11 +89,12 @@ export default function List() {
               </span>
               <select
                 className="form-input shadow-md filter"
+                defaultValue={""}
                 onChange={(e) => {
                   handleFilter(e);
                 }}
               >
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Select an option
                 </option>
                 <option value="Excited">Excited</option>
