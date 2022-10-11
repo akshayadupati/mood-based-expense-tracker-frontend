@@ -3,7 +3,7 @@ import { default as api } from "../../store/apiSlice";
 import Charts from "../Charts/Charts";
 import { CSVLink } from "react-csv";
 import loader from "../../assets/loader.gif";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function List() {
@@ -22,12 +22,11 @@ export default function List() {
   const handleFilter = async (e) => {
     setIsFilter(true);
     console.log("eventtt", e.target.value);
-    filteredData = await data.filter((eachData) => {
-      if (eachData.transactionMood === e.target.value) {
-        return eachData;
-      }
-    });
-    console.log("filteredData", filteredData);
+    // filteredData = await data.filter((eachData) => {
+    //   if (eachData.transactionMood === e.target.value) {
+    //     return eachData;
+    //   }
+    // });
   };
   if (isFetching) {
     Transactions = <h2>Fetching....</h2>;
