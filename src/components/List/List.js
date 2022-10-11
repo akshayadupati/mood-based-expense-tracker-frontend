@@ -43,7 +43,7 @@ export default function List() {
 
   const handleFilter = async (e) => {
     setIsFilter(true);
-    let filteredData = data.filter((eachData) => {
+    let filteredData = data.map((eachData) => {
       if (eachData.transactionMood === e.target.value) {
         return eachData;
       }
