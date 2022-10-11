@@ -7,7 +7,6 @@ const Form = () => {
   const [addTransaction] = api.useAddTransactionMutation();
   let date = new Date().toISOString().split('T')[0].toString()
   const submitFormHandler = async (data) => {
-    console.log("data", data);
     if (!data) return {};
     await addTransaction(data).unwrap();
     resetField("expenseName");

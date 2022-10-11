@@ -28,12 +28,13 @@ export default function List() {
         Expense_Type: eachData.expenseType,
         Mood: eachData.transactionMood,
         Amount: eachData.transactionAmount,
+        Date: new Date(eachData.transactionDate).toISOString().split("T")[0],
       }));
       Transactions = data.map((eachObj, index) => (
         <Transaction
           handleDelete={handleDelete}
           category={eachObj}
-          key={index}
+          index={index}
         ></Transaction>
       ));
     } else if (isError) {
@@ -120,13 +121,13 @@ export default function List() {
               <Transaction
                 handleDelete={handleDelete}
                 category={eachObj}
-                key={index}
+                index={index}
               ></Transaction>
             </div>
           ))}
 
           <button className="download-btn p-2 mt-3 border-transparent shadow-2xl	w-fit text-center mx-auto">
-            <Link to="/history">Go back</Link>
+            <Link to="/home">Go back</Link>
           </button>
         </div>
       ) : (
@@ -141,7 +142,7 @@ export default function List() {
   );
 }
 
-function Transaction({ category, handleDelete }) {
+function Transaction({ category, handleDelete, index }) {
   if (!category) {
     return null;
   }
@@ -149,6 +150,7 @@ function Transaction({ category, handleDelete }) {
     <div
       className="item flex justify-center bg-gray-50 py-2 rounded "
       style={{ borderRight: `8px solid ${category.color ?? "black"}` }}
+      key={index}
     >
       <button className="px-3" onClick={handleDelete}>
         <box-icon data-id={category._id} size="15px" color="red" name="trash" />
