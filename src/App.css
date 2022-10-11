@@ -71,3 +71,11 @@
   border-radius: 5px !important;
   background-color: rgb(186, 145, 68);
 }
+
+.mustard{
+  background-color: rgb(186, 145, 68);
+}
+
+.filter{
+  width: fit-content !important;
+}

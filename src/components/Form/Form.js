@@ -15,18 +15,21 @@ const Form = () => {
 
   return (
     <div className="form max-w-sm mx-auto w-96">
-      <h1 className="font-bold pb-4 text-xl">Transaction</h1>
+      <h1 className="font-bold pb-4 text-xl">Add a new transaction </h1>
       <form id="form" onSubmit={handleSubmit(submitFormHandler)}>
         <div className="grid gap-4">
           <div className="input-group">
             <input
               type="text"
-              {...register("expenseName")}
+              {...register("expenseName", { required: true, minLength: 2 })}
               placeholder="Enter transaction name.."
-              className="form-input"
+              className="form-input shadow-md"
             ></input>
           </div>
-          <select className="form-input" {...register("expenseType")}>
+          <select
+            className="form-input shadow-md"
+            {...register("expenseType", { required: true })}
+          >
             <option value="Rental">Rental</option>
             <option value="Food">Food</option>
             <option value="Movies">Movies</option>
@@ -34,31 +37,34 @@ const Form = () => {
             <option value="Education">Education</option>
             <option value="Other">Other</option>
           </select>
-          <select className="form-input" {...register("transactionMood")}>
-            <option value="Excited">Excited</option>
-            <option value="Happy">Happy</option>
-            <option value="Normal">Normal</option>
-            <option value="Sad">Sad</option>
-            <option value="Depressed">Depressed</option>
+          <select
+            className="form-input shadow-md"
+            {...register("transactionMood", { required: true })}
+          >
+            <option value="Excited">Excited 🤩</option>
+            <option value="Happy">Happy 😊</option>
+            <option value="Normal">Normal 😬</option>
+            <option value="Sad">Sad 😔</option>
+            <option value="Depressed">Depressed 😭</option>
           </select>
-          <div className="input-group">
+          <div className="input-group shadow-md">
             <input
               type="number"
-              {...register("transactionAmount")}
+              {...register("transactionAmount", { required: true, min: 1 })}
               placeholder="Enter amount.."
               className="form-input"
             ></input>
           </div>
-          <div className="submit-btn">
-            <button className="border py-2 text-white bg-black w-full">
+          <div className="submit-btn shadow-md">
+            <button className="border py-2 text-white mustard w-full rounded-md">
               Add Transaction
             </button>
           </div>
         </div>
       </form>
-      <div className="submit-btn">
+      <div className="submit-btn shadow-md">
         <Link to="/history">
-          <button className="border py-2 mt-3 text-white bg-black w-full">
+          <button className="border py-2 mt-3 text-white mustard w-full rounded-md">
             View history
           </button>
         </Link>
