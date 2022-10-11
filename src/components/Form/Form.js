@@ -5,12 +5,14 @@ import { default as api } from "../../store/apiSlice";
 const Form = () => {
   const { register, handleSubmit, resetField } = useForm();
   const [addTransaction] = api.useAddTransactionMutation();
-
+  let date = new Date().toISOString().split('T')[0].toString()
   const submitFormHandler = async (data) => {
+    console.log("data", data);
     if (!data) return {};
     await addTransaction(data).unwrap();
     resetField("expenseName");
     resetField("transactionAmount");
+    resetField("transactionDate");
   };
 
   return (
@@ -52,6 +54,17 @@ const Form = () => {
               type="number"
               {...register("transactionAmount", { required: true, min: 1 })}
               placeholder="Enter amount.."
+              className="form-input"
+            ></input>
+          </div>
+          <div className="input-group shadow-md">
+            <input
+              type="date"
+              max={date}
+              {...register("transactionDate", {
+                required: true
+              })}
+              placeholder="Enter transaction date..."
               className="form-input"
             ></input>
           </div>

@@ -7,46 +7,50 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function List() {
-  const { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
+  let { data, isFetching, isSuccess, isError } = api.useGetLabelsQuery();
   const [isFilter, setIsFilter] = useState(false);
   const [deleteTransaction] = api.useDeleteTransactionMutation();
+  let [filteredData, setFilteredData] = useState([]);
   let Transactions;
   let csvData = [];
-  let filteredData = [];
 
   const handleDelete = async (e) => {
     if (!e.target.dataset.id) return 0;
     await deleteTransaction({ _id: e.target.dataset.id }).unwrap();
   };
 
+  if (!isFilter) {
+    if (isFetching) {
+      Transactions = <h2>Fetching....</h2>;
+    } else if (isSuccess) {
+      csvData = data.map((eachData) => ({
+        Expense_Name: eachData.expenseName,
+        Expense_Type: eachData.expenseType,
+        Mood: eachData.transactionMood,
+        Amount: eachData.transactionAmount,
+      }));
+      Transactions = data.map((eachObj, index) => (
+        <Transaction
+          handleDelete={handleDelete}
+          category={eachObj}
+          key={index}
+        ></Transaction>
+      ));
+    } else if (isError) {
+      Transactions = <h2>Ooops. Error occurred! </h2>;
+    }
+  }
+
   const handleFilter = async (e) => {
     setIsFilter(true);
-    console.log("eventtt", e.target.value);
-    // filteredData = await data.filter((eachData) => {
-    //   if (eachData.transactionMood === e.target.value) {
-    //     return eachData;
-    //   }
-    // });
+    setFilteredData(
+      data.filter((eachData) => {
+        if (eachData.transactionMood === e.target.value) {
+          return eachData;
+        }
+      })
+    );
   };
-  if (isFetching) {
-    Transactions = <h2>Fetching....</h2>;
-  } else if (isSuccess) {
-    csvData = data.map((eachData) => ({
-      Expense_Name: eachData.expenseName,
-      Expense_Type: eachData.expenseType,
-      Mood: eachData.transactionMood,
-      Amount: eachData.transactionAmount,
-    }));
-    Transactions = data.map((eachObj, index) => (
-      <Transaction
-        handleDelete={handleDelete}
-        category={eachObj}
-        key={index}
-      ></Transaction>
-    ));
-  } else if (isError) {
-    Transactions = <h2>Ooops. Error occurred! </h2>;
-  }
 
   if (isFetching) {
     return (
@@ -55,20 +59,10 @@ export default function List() {
       </div>
     );
   }
-  if (isFilter && filteredData.length > 0) {
-    console.log("filteredData insidee", filteredData);
-    Transactions = filteredData.map((eachObj, index) => (
-      <Transaction
-        handleDelete={handleDelete}
-        category={eachObj}
-        key={index}
-      ></Transaction>
-    ));
-  }
+
   return (
     <>
-      {console.log("transactionsss", Transactions)}
-      {csvData.length !== 0 && data !== undefined ? (
+      {csvData.length !== 0 && data !== undefined && !isFilter ? (
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <Charts />
@@ -95,8 +89,13 @@ export default function List() {
               </span>
               <select
                 className="form-input shadow-md filter"
-                onChange={handleFilter}
+                onChange={(e) => {
+                  handleFilter(e);
+                }}
               >
+                <option value="" disabled selected>
+                  Select an option
+                </option>
                 <option value="Excited">Excited</option>
                 <option value="Happy">Happy</option>
                 <option value="Normal">Normal</option>
@@ -112,6 +111,22 @@ export default function List() {
               </button>
             </Link>
           </div>
+        </div>
+      ) : isFilter && filteredData.length > 0 ? (
+        <div className="grid gap-2">
+          {filteredData.map((eachObj, index) => (
+            <div className="row">
+              <Transaction
+                handleDelete={handleDelete}
+                category={eachObj}
+                key={index}
+              ></Transaction>
+            </div>
+          ))}
+
+          <button className="download-btn p-2 mt-3 border-transparent shadow-2xl	w-fit text-center mx-auto">
+            <Link to="/history">Go back</Link>
+          </button>
         </div>
       ) : (
         <>
@@ -129,7 +144,6 @@ function Transaction({ category, handleDelete }) {
   if (!category) {
     return null;
   }
-  console.log("mmmm", category);
   return (
     <div
       className="item flex justify-center bg-gray-50 py-2 rounded "
@@ -138,8 +152,12 @@ function Transaction({ category, handleDelete }) {
       <button className="px-3" onClick={handleDelete}>
         <box-icon data-id={category._id} size="15px" color="red" name="trash" />
       </button>
-      <span className="block w-3/6 font-bold">{category.expenseName ?? ""}</span>
-      <span className="block w-3/6 font-bold">{category.transactionAmount ?? ""}</span>
+      <span className="block w-3/6 font-bold">
+        {category.expenseName ?? ""}
+      </span>
+      <span className="block w-3/6 font-bold">
+        {category.transactionAmount ?? ""}
+      </span>
     </div>
   );
 }
