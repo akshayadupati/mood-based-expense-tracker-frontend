@@ -43,13 +43,12 @@ export default function List() {
 
   const handleFilter = async (e) => {
     setIsFilter(true);
-    setFilteredData(() =>
-      data.filter((eachData) => {
-        if (eachData.transactionMood === e.target.value) {
-          return eachData;
-        }
-      })
-    );
+    let filteredData = data.filter((eachData) => {
+      if (eachData.transactionMood === e.target.value) {
+        return eachData;
+      }
+    });
+    setFilteredData(filteredData);
   };
 
   if (isFetching) {
