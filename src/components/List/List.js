@@ -35,6 +35,7 @@ export default function List() {
           handleDelete={handleDelete}
           category={eachObj}
           index={index}
+          filter={false}
         ></Transaction>
       ));
     } else if (isError) {
@@ -122,6 +123,7 @@ export default function List() {
                 handleDelete={handleDelete}
                 category={eachObj}
                 index={index}
+                filter={true}
               ></Transaction>
             </div>
           ))}
@@ -142,7 +144,7 @@ export default function List() {
   );
 }
 
-function Transaction({ category, handleDelete, index }) {
+function Transaction({ category, handleDelete, index, filter }) {
   if (!category) {
     return null;
   }
@@ -152,9 +154,16 @@ function Transaction({ category, handleDelete, index }) {
       style={{ borderRight: `8px solid ${category.color ?? "black"}` }}
       key={index}
     >
-      <button className="px-3" onClick={handleDelete}>
-        <box-icon data-id={category._id} size="15px" color="red" name="trash" />
-      </button>
+      {!filter && (
+        <button className="px-3" onClick={handleDelete}>
+          <box-icon
+            data-id={category._id}
+            size="15px"
+            color="red"
+            name="trash"
+          />
+        </button>
+      )}
       <span className="block w-3/6 font-bold">
         {category.expenseName ?? ""}
       </span>
